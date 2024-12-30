@@ -21,7 +21,27 @@
             <td><input type="text" name="email" id="email"></td>
         </tr>
         <tr>
-            <td><input type="submit" value="註冊"> <input type="reset" value="清除"></td>
+            <td><input type="button" value="註冊" onclick='reg()'> <input type="reset" value="清除"></td>
         </tr>
     </table>
 </fieldset>
+
+<script>
+function reg() {
+    let user = {
+        acc: $("#acc").val(),
+        pw: $("#pw").val(),
+        pw2: $("#pw2").val(),
+        email: $("#email").val()
+    }
+    console.log(user);
+    //判斷是否為空白
+    if (user.acc == "" || user.pw == "" || user.pw2 == "" || user.email == "") {
+        alert("不可空白")
+    }
+    //判斷密碼是否正確 客戶端先行判斷
+    if (user.pw != user.pw2) {
+
+    }
+}
+</script>
