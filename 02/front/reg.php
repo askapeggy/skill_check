@@ -21,7 +21,8 @@
             <td><input type="text" name="email" id="email"></td>
         </tr>
         <tr>
-            <td><input type="button" value="註冊" onclick='reg()'> <input type="reset" value="清除"></td>
+            <td><input type="button" value="註冊" onclick='reg()'> <input type="button" value="清除" onclick="resetForm()">
+            </td>
         </tr>
     </table>
 </fieldset>
@@ -38,10 +39,35 @@ function reg() {
     //判斷是否為空白
     if (user.acc == "" || user.pw == "" || user.pw2 == "" || user.email == "") {
         alert("不可空白")
+    } else {
+        //判斷密碼是否正確 客戶端先行判斷
+        if (user.pw != user.pw2) {
+            alert("密碼錯誤")
+        } else {
+            $.get("./api/chk_acc.php", {
+                acc: user.acc
+            }, (res) => {
+                console.log("chk acc=>", res);
+                if (parseInt(res) > 0) {
+                    alert("帳號重複");
+                } else {
+                    $.post("./api/reg.php", user, (res) => {
+                        if (parseInt(res) == 1) {
+                            alert("註冊完成,歡迎加入");
+                        } else {
+                            alert("註冊失敗");
+                        }
+                    })
+                }
+            })
+        }
     }
-    //判斷密碼是否正確 客戶端先行判斷
-    if (user.pw != user.pw2) {
+}
 
-    }
+function resetForm() {
+    $("#acc").val("");
+    $("#pw").val("");
+    $("#pw2").val("");
+    $("#email").val("");
 }
 </script>
