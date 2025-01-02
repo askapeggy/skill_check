@@ -11,25 +11,23 @@
             <td id="result"></td>
         </tr>
         <tr>
-            <td><input type="button" value="尋找" onclick="myFind()"></td>
+            <td><input type="button" value="尋找" onclick="forgot()"></td>
         </tr>
     </table>
 </fieldset>
 
 <script>
-function myFind() {
-    let user = {
-        email: $("#email").val(),
-    }
-     $User->count($_GET);
-    $.post("./api/forgot_find.php", user, (res) => {
-        console.log("myFind =>", res);
-        if (res == "") {
-            alert("沒有此email");
-        } else {
-            $("#result").text("密碼:" +
-                res);
-        }
+function forgot() {
+    let email = $("#email").val();
+    $.post("./api/chk_email.php", {
+        email
+    }, (res) => {
+        $("#result").html(res);
     })
+}
+
+function resetForm() {
+    $("#acc").val("");
+    $("#pw").val("");
 }
 </script>
