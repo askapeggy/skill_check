@@ -16,10 +16,14 @@
             <td>
                 <?=str_repeat("*",strlen($row['pw']));?>
             </td>
-            <td><input type="checkbox" name="del[]" value=""></td>
+            <td><input type="checkbox" name="del[]" value="<?=$row['id'];?>"></td>
         </tr>
         <?php endforeach;?>
     </table>
+    <div class="ct">
+        <input type="button" value="確定刪除" onclick="del()">
+        <input type="button" value="清空選取" onclick="resetChk()">
+    </div>
 
 
     <!-- <fieldset style="width:50%;margin:auto;"> -->
@@ -89,6 +93,23 @@
         $("#pw").val("");
         $("#pw2").val("");
         $("#email").val("");
+    }
+
+    function resetChk() {
+        $("input[type='checkbox']").prop("checked", false);
+    }
+
+    function del() {
+        let dels = $("input[name='del[]']:checked");
+        let ids = new Array();
+        dels.each((idx, item) => {
+            ids.push($(item).val())
+        })
+        $.post("./api/del_user.php", {
+            ids
+        }, () => {
+            location.reload();
+        })
     }
     </script>
 </fieldset>
