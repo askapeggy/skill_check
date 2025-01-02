@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html
+﻿<?php include_once "./api/db.php";?>
+<!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0039) -->
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -39,7 +40,15 @@
                         <marquee behavior="" direction="">請民眾踴躍投稿電子報，讓電子報成為大家相互交流、分享的園地!詳見最新文章</marquee>
                     </div>
                     <span style="width:23%; display:inline-block;">
+                        <?php if(!isset($_SESSION['user'])):?>
                         <a href="?do=login">會員登入</a>
+                        <?php else:?>
+                        歡迎,<?=$_SESSION['user'];?><br>
+                        <?php if($_SESSION['user'] == 'admin'):?>
+                        <button onclick="location.href='admin.php'">管理</button>|
+                        <?php endif;?>
+                        <button onclick="logout()">登出</button>
+                        <?php endif;?>
                     </span>
                 </div>
 
