@@ -23,12 +23,23 @@
 <script>
 function more() {
     el = `<div>
-            選項 <input type="text" name="option[]" id="" style"width:80%">
+            選項 <input type="text" name="option[]" id="" >
          </div>`;
     $("#options").before(el);
 }
 
-function send() {}
+function send() {
+    let subject = $('#subject').val();
+    let options = $('input[name="option[]"]').map((id, item) => $(item).val()).get();
+    // console.log(subject, options);
+    $.post("./api/add_que.php", {
+        subject,
+        options
+    }, (res) => {
+        location.reload();
+        // console.log(res);
+    })
+}
 
 function resetForm() {
     $("input[type='text']").val("");
