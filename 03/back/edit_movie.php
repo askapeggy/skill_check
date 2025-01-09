@@ -53,7 +53,7 @@
                     </select>年
                     <select name="moth" id="">
                         <?php
-                        for($i= 0; $i<=12; $i++)
+                        for($i= 1; $i<=12; $i++)
                         {
                             echo "<option value='$i'>$i</option>";
                         }
@@ -61,7 +61,7 @@
                     </select>月
                     <select name="day" id="">
                         <?php
-                        for($i= 0; $i<=31; $i++)
+                        for($i= 1; $i<=31; $i++)
                         {
                             echo "<option value='$i'>$i</option>";
                         }

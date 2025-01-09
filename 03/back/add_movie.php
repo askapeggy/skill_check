@@ -18,7 +18,7 @@
 </style>
 
 
-<form action="./api/add_movie.php" method="post" enctype="multpart/form-data">
+<form action="./api/add_movie.php" method="post" enctype="multipart/form-data">
     <div style="width:70%; margin:auto;display:flex;">
         <div style="width:15%;">影片資料</div>
         <div style="width:85%;">
@@ -51,9 +51,9 @@
                         <option value="2025">2025</option>
                         <option value="2026">2026</option>
                     </select>年
-                    <select name="moth" id="">
+                    <select name="month" id="">
                         <?php
-                        for($i= 0; $i<=12; $i++)
+                        for($i= 1; $i<=12; $i++)
                         {
                             echo "<option value='$i'>$i</option>";
                         }
@@ -61,7 +61,7 @@
                     </select>月
                     <select name="day" id="">
                         <?php
-                        for($i= 0; $i<=31; $i++)
+                        for($i= 1; $i<=31; $i++)
                         {
                             echo "<option value='$i'>$i</option>";
                         }
