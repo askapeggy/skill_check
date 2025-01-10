@@ -18,7 +18,7 @@
 </style>
 
 
-<form action="./api/add_movie.php" method="post" enctype="multipart/form-data">
+<form action="./api/save_movie.php" method="post" enctype="multipart/form-data">
     <div style="width:70%; margin:auto;display:flex;">
         <div style="width:15%;">影片資料</div>
         <div style="width:85%;">
@@ -93,7 +93,7 @@
     <div style="display:flex; width:70%;margin:auto;">
         <div style="width:15%;">劇情介紹</div>
         <div style="width:85%;">
-            <textarea name="intro" id="" style="width:99%"> </textarea>
+            <textarea name="intro" id="" style="width:99%"></textarea>
         </div>
     </div>
 
