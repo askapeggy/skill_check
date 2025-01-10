@@ -1,14 +1,130 @@
+<style>
+.poster-block * {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    box-sizing: border-box;
+}
+
+.poster-block {
+    width: 420px;
+    height: 400px;
+}
+
+.lists {
+    width: 210px;
+    height: 280px;
+    margin: auto;
+    position: relative;
+}
+
+.controls {
+    width: 100%;
+    height: 100px;
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.poster {
+    position: absolute;
+    display: none;
+    text-align: center;
+}
+
+.poster img {
+    display: block;
+    width: 210px;
+    height: 250px;
+}
+
+.poster span {
+    font-size: 18px;
+}
+
+.left,
+.right {
+    width: 0;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+}
+
+.left {
+    border-right: 25px solid #eee;
+    border-left: 0;
+}
+
+.right {
+    border-left: 25px solid #eee;
+    border-right: 0;
+}
+
+.icons {
+    width: 320px;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
+
+.icon {
+    width: 80px;
+    height: 100px;
+    flex-shrink: 0;
+    text-align: center;
+    position: relative;
+}
+
+.icon img {
+    width: 70px;
+    height: 80px;
+}
+
+.icon div {
+    font-size: 12px;
+}
+</style>
 <div class="half" style="vertical-align:top;">
     <h1>預告片介紹</h1>
     <div class="rb tab" style="width:95%;">
-        <div id="abgne-block-20111227">
-            <ul class="lists">
-            </ul>
-            <ul class="controls">
-            </ul>
+        <div class="poster-block">
+            <div class="lists">
+                <?php 
+                    $posters=$Poster->all(['sh'=>1]," order by rank");
+                    foreach($posters as $idx => $poster):
+                ?>
+                <div class="poster">
+                    <img src="./upload/<?=$poster['img'];?>" alt="">
+                    <span><?=$poster['name'];?></span>
+                </div>
+                <?php
+                    endforeach;
+                ?>
+            </div>
+            <div class="controls">
+                <div class='left'></div>
+                <div class='icons'>
+                    <?php 
+                        foreach($posters as $idx => $poster):
+                    ?>
+                    <div class="icon">
+                        <img src="./upload/<?=$poster['img'];?>">
+                        <div><?=$poster['name'];?></div>
+                    </div>
+                    <?php endforeach;?>
+                </div>
+                <div class='right'></div>
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+$(".poster").eq(0).show();
+</script>
+
+
+
 <div class="half">
     <h1>院線片清單</h1>
     <?php 
@@ -46,7 +162,9 @@
             ?>
             <div class='movie-item'>
                 <div style="width:65px;">
-                    <img src="./upload/<?=$row['poster'];?>" style="width:60px;height:80px;">
+                    <a href="?do=intro&id=<?=$row['id'];?>">
+                        <img src="./upload/<?=$row['poster'];?>" style="width:60px;height:80px;">
+                    </a>
                 </div>
                 <div style="width:calc(100% - 65px);">
                     <div style="font-size:18px;"><?=$row['name'];?></div>
@@ -57,7 +175,8 @@
                     <div>上映日期:<?=$row['ondate'];?></div>
                 </div>
                 <div style="width:100%;" class="ct">
-                    <button>劇情簡介</button><button>線上訂票</button>
+                    <button onclick="location.href='?do=intro&id=<?=$row['id'];?>'">劇情簡介</button>
+                    <button onclick="location.href='?do=order&id=<?=$row['id'];?>'">線上訂票</button>
                 </div>
             </div>
             <?php
