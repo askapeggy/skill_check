@@ -1,5 +1,6 @@
 <?php
-
+//定義時區
+date_default_timezone_set("Asia/Taipei");
 session_start();
 
 class DB{

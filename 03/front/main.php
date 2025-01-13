@@ -155,6 +155,26 @@ function sliders() {
     }
 
 }
+let total = $(".icon").length;
+let p = 0;
+$(".left,.right").on("click", function() {
+    let regP = p;
+    if ($(this).hasClass('right')) {
+        if (p < (total - 4)) {
+            p++;
+        }
+    } else if ($(this).hasClass('left')) {
+        if (p != 0) {
+            p--;
+        }
+    }
+    if (regP != p) {
+        $(".icon").animate({
+            right: 80 * p
+        });
+    }
+    console.log(p);
+})
 </script>
 
 
