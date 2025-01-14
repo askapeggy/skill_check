@@ -126,9 +126,11 @@ let slider = setInterval(() => {
     sliders();
 }, 2500);
 
-function sliders() {
+function sliders(next = -1) {
     let now = $(".poster:visible").index();
-    let next = ($(".poster").length == now + 1) ? 0 : now + 1;
+    if (next == -1) {
+        next = ($(".poster").length == now + 1) ? 0 : now + 1;
+    }
     let ani = $(".poster").eq(next).data('ani');
     //console.log(now,next)
 
@@ -160,13 +162,9 @@ let p = 0;
 $(".left,.right").on("click", function() {
     let regP = p;
     if ($(this).hasClass('right')) {
-        if (p < (total - 4)) {
-            p++;
-        }
+        p = (p != (total - 4)) ? p + 1 : total - 4;
     } else if ($(this).hasClass('left')) {
-        if (p != 0) {
-            p--;
-        }
+        p = (p != 0) ? p - 1 : 0;
     }
     if (regP != p) {
         $(".icon").animate({
@@ -175,6 +173,24 @@ $(".left,.right").on("click", function() {
     }
     console.log(p);
 })
+
+$(".icons").hover(
+    function() {
+        console.log("AB");
+        clearInterval(slider);
+    },
+    function() {
+        console.log("CB");
+        slider = setInterval(() => {
+            sliders();
+        }, 2500);
+    }
+);
+$(".icon").on("click", function() {
+    clearInterval(slider);
+    let next = $(this).index();
+    sliders(next);
+});
 </script>
 
 
