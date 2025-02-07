@@ -77,7 +77,7 @@ class DB{
         }else{
             //insert
             $cols=array_keys($array);
-            $sql="INSERT INTO $this->table (`".join("`,`",$cols)."`) VALUES('".join("','",$array)."')";
+            $sql="INSERT INTO $this->table (`".join(',',$cols)."`) VALUES('".join("','",$array)."')";
         }
         //echo $sql;
         return $this->pdo->exec($sql);
@@ -162,4 +162,5 @@ function to($url)
 
 $Poster = new DB("posters");
 $Movie = new DB("movies");
+$Order = new DB("orders");
 ?>
